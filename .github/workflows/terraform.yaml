@@ -36,7 +36,7 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.0
         continue-on-error: true
 
-      - name: Terraform Plan (JSON output for tests)
+      - name: Generate Terraform JSON Plan
         run: |
           terraform init -backend=false
           terraform plan -out=tfplan.binary
