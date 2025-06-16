@@ -6,10 +6,10 @@ run "vpc_creation" {
   command = apply
 
   # You can define variable values for the module under test here
-  variables = {
-    vpc_cidr = "10.0.0.0/16"
-    # ... other module variables
-  }
+#  variables = {
+#    vpc_cidr = "10.0.0.0/16"
+#    # ... other module variables
+#  }
 
   # Assertions to check the expected outcomes after applying
   assert {
