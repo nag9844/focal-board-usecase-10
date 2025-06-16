@@ -77,6 +77,9 @@ jobs:
           conftest test tfplan.json --policy policy/
         continue-on-error: true
 
+      - name: Terraform Test
+        run: terraform test || true
+
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@v12
         with:
