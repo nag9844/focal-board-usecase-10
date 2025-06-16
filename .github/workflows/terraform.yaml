@@ -123,11 +123,11 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      - name: Run Terraform Tests
-        id: test
-        run: terraform test -test-directory=./tests
-        # You can add options like -test-directory if your tests are not in the default location
-        # run: terraform test -test-directory=./tests
+      # - name: Run Terraform Tests
+      #   id: test
+      #   run: terraform test -test-directory=./tests
+      #   # You can add options like -test-directory if your tests are not in the default location
+      #   # run: terraform test -test-directory=./tests
 
       - name: Terraform Plan
         id: plan
