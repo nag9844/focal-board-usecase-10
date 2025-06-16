@@ -46,24 +46,18 @@ jobs:
         run: tflint --init && tflint -f compact
         continue-on-error: true
 
-      - name: Run tfsec
-        uses: aquasecurity/tfsec-action@v1.0.0
-        continue-on-error: true
-
-      # - name: Generate Terraform JSON Plan
-      #   run: |
-      #     terraform init -reconfigure
-      #     terraform plan -out=tfplan.binary
-      #     terraform show -json tfplan.binary > tfplan.json
-
-      # - name: Install terraform-compliance
-      #   run: |
-      #     pip install terraform-compliance
-
-      # - name: Run terraform-compliance Tests
-      #   run: |
-      #     terraform-compliance -p tfplan.json -f tests/terraform_compliance
+      # - name: Run tfsec
+      #   uses: aquasecurity/tfsec-action@v1.0.0
       #   continue-on-error: true
+      
+      - name: Terraform test
+        run: terraform test -filter=tests/vpc_test.tftest.hcl
+
+      - name: Generate Terraform JSON Plan
+        run: |
+          terraform init -reconfigure
+          terraform plan -out=tfplan.binary
+          terraform show -json tfplan.binary > tfplan.json
 
       - name: Install Conftest
         run: |
@@ -122,12 +116,6 @@ jobs:
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-
-      # - name: Run Terraform Tests
-      #   id: test
-      #   run: terraform test -test-directory=./tests
-      #   # You can add options like -test-directory if your tests are not in the default location
-      #   # run: terraform test -test-directory=./tests
 
       - name: Terraform Plan
         id: plan
